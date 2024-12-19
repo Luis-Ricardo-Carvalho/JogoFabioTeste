@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cybgr5qeh2m2r"]
+
+[ext_resource type="PackedScene" uid="uid://bv8ygr00m2spq" path="res://personagens/principal.tscn" id="1_d5bcu"]
+
+[node name="fase01" type="Node2D"]
+
+[node name="Principal" parent="." instance=ExtResource("1_d5bcu")]

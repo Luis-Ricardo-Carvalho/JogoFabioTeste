@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://bv8ygr00m2spq"]
+
+[ext_resource type="Texture2D" uid="uid://2313fw2nd5n5" path="res://imagens/hero.png" id="1_0iyel"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnano"]
+atlas = ExtResource("1_0iyel")
+region = Rect2(0, 0, 6, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4htxg"]
+atlas = ExtResource("1_0iyel")
+region = Rect2(6, 0, 6, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytndd"]
+atlas = ExtResource("1_0iyel")
+region = Rect2(12, 0, 6, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dku7y"]
+atlas = ExtResource("1_0iyel")
+region = Rect2(0, 0, 6, 9)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j2vuj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nnano")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4htxg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ytndd")
+}],
+"loop": true,
+"name": &"andando",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dku7y")
+}],
+"loop": true,
+"name": &"parado",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dmvx4"]
+size = Vector2(6, 9)
+
+[node name="Principal" type="CharacterBody2D"]
+metadata/_edit_group_ = true
+
+[node name="animacao" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_j2vuj")
+animation = &"parado"
+autoplay = "parado"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_dmvx4")
