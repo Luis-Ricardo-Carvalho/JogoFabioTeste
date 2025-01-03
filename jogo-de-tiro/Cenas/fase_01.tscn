@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckamf1aqiij3v"]
+
+[ext_resource type="PackedScene" uid="uid://dx11qv2eulcq5" path="res://Cenas/Mundo.tscn" id="1_jqwpd"]
+[ext_resource type="PackedScene" uid="uid://djwcc4tltk2d5" path="res://Cenas/jogador.tscn" id="2_ewndd"]
+
+[node name="Fase01" type="Node2D"]
+
+[node name="Mundo" parent="." instance=ExtResource("1_jqwpd")]
+
+[node name="Jogador" parent="." instance=ExtResource("2_ewndd")]
+position = Vector2(-17, 5)
