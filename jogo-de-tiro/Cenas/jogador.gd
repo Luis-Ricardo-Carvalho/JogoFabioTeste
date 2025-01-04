@@ -1,19 +1,35 @@
 extends CharacterBody2D
 
+signal shoot
+
+const START_speed : int = 200
+const BOOST_speed : int = 400
+const NORMAL_shot : float = 0.5
+const FAST_shot : float = 0.1
 var speed : int
+var can_shoot : bool
 var screen_size : Vector2
 
 func _ready():
+	can_shoot = true
 	screen_size = get_viewport_rect().size
 	position = screen_size /2
-	speed = 200
+	speed = START_speed
+	$BalaTimer.wait_time = NORMAL_shot
 
 func get_input():
 	#teclas do teclado
 	var input_dir = Input.get_vector("left", "right", "up", "down")
 	velocity = input_dir.normalized() * speed
+	
+	#mouse vlics
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and can_shoot:
+		var dir = get_global_mouse_position() - position
+		shoot.emit(position, dir)
+		can_shoot = false
+		$BalaTimer.start()
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	#movimento do Jogador
 	get_input()
 	move_and_slide()
@@ -35,15 +51,22 @@ func _physics_process(delta):
 	else: 
 		$AnimatedSprite2D.stop()
 		$AnimatedSprite2D.frame = 1
-#const SPEED = 300
+
+func boost():
+	$BoostTimer.start()
+	speed = BOOST_speed
+
+func quick_fire():
+	$FastTimer.start()
+	$BalaTimer.wait_time = FAST_shot
+
+func _on_bala_timer_timeout():
+	can_shoot = true
 
 
-#func _physics_process(delta: float) -> void:
+func _on_boost_timer_timeout() -> void:
+	speed = START_speed
 
-#	var direction := Input.get_vector("left", "right", "up", "down")
-#	if direction:
-#		velocity.x = direction * SPEED
-#	else:
-#		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-#	move_and_slide()
+func _on_fast_timer_timeout():
+	$BalaTimer.wait_time = NORMAL_shot

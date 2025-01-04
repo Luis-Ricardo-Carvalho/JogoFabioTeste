@@ -169,6 +169,9 @@ animations = [{
 size = Vector2(40, 64)
 
 [node name="Jogador" type="CharacterBody2D"]
+z_index = 2
+collision_layer = 2
+collision_mask = 17
 script = ExtResource("1_m5rw0")
 metadata/_edit_group_ = true
 
@@ -180,3 +183,16 @@ animation = &"Andar7"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_dkt1t")
+
+[node name="BalaTimer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="BoostTimer" type="Timer" parent="."]
+wait_time = 6.0
+
+[node name="FastTimer" type="Timer" parent="."]
+wait_time = 4.0
+
+[connection signal="timeout" from="BalaTimer" to="." method="_on_bala_timer_timeout"]
+[connection signal="timeout" from="BoostTimer" to="." method="_on_boost_timer_timeout"]
+[connection signal="timeout" from="FastTimer" to="." method="_on_fast_timer_timeout"]
